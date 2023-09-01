@@ -1,0 +1,26 @@
+# Archivos y directorios generados por Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entornos virtuales de Python
+venv/
+env/
+env3/
+pyenv/
+.venv/
+
+# Carpeta de archivos locales generados
+*.log
+*.sqlite3
+
+# Carpeta de dependencias
+lib/
+libs/
+lib64/
+__pycache__/
+bin/
+include/
+token swarm
+.env

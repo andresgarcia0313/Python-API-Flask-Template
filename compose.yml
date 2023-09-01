@@ -1,0 +1,28 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Containerfile
+    ports:
+      - '5000:5000'
+    environment:
+      - FLASK_SERVER_PORT=5000
+      - FLASK_RUN_HOST=0.0.0.0
+    volumes:
+      - ./src:/app/src
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:5000/flask-health-check || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    # command mantendrá el contenedor en ejecución y no se cerrará después de que se inicie
+    command: ["sh", "-c", "flask run --host=0.0.0.0 --port=5000 --reload & tail -f /dev/null"]
+    # Para ejecutar la aplicacion en caso de cerrarse puedes ejecutar esto:
+    # docker compose exec app flask run
+    # Tambièn puedes abrir el contenedor con vscode para ingresar a la carpeta 
+    #    del contenedor y trabajar y tener la terminal dentro del contenedor
+    #    tiene las ventajas de que si ejecutas algùn puerto dentro del 
+    #    contenedor este lo expone automaticamente vscode al puerto host para ver su ejecuciòn
+    #    tambièn te permite depurar con normalidad
